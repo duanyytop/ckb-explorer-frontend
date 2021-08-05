@@ -72,6 +72,25 @@ yarn build    # build ckb explorer frontend project
 yarn test     # run project test cases
 ```
 
+### Running with Docker
+
+```
+// Build and tag the Docker image
+docker build -t dylan/ckb-explorer-frontend . 
+
+// Then, spin up the container once the build is done
+docker run \                                                                                                                                               1m 48s 17:36:22
+    -it \
+    --rm \
+    -v ${PWD}:/app \
+    -v /app/node_modules \
+    -p 3001:3000 \
+    -e CHOKIDAR_USEPOLLING=true \
+    dylan/ckb-explorer-frontend
+```
+
+Open your browser to http://localhost:3001/ and you should see the app
+
 ## License
 
 CKB Explorer Frontend is released under the terms of the MIT license. See [COPYING](COPYING) for more information or see [https://opensource.org/licenses/MIT](https://opensource.org/licenses/MIT).
