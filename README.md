@@ -76,7 +76,7 @@ yarn test     # run project test cases
 
 ```
 // Build and tag the Docker image
-docker build -t dylan/ckb-explorer-frontend . 
+docker build -t explorer/dev . 
 
 // Then, spin up the container once the build is done
 docker run \                                                                                                                                               1m 48s 17:36:22
@@ -86,10 +86,48 @@ docker run \                                                                    
     -v /app/node_modules \
     -p 3001:3000 \
     -e CHOKIDAR_USEPOLLING=true \
-    dylan/ckb-explorer-frontend
+    explorer/dev
 ```
 
 Open your browser to http://localhost:3001/ and you should see the app
+
+### Running with Docker Compose
+
+```
+docker-compose up -d --build
+```
+
+Open your browser to http://localhost:3001/ and you should see the app
+
+Ensure the app is running in the browser and test hot-reloading again. Bring down the container before moving on:
+
+```
+docker-compose stop
+```
+
+### Building production with Docker
+
+Using the production Dockerfile, build and tag the Docker image:
+
+```
+docker build -f Dockerfile.prod -t explorer:prod .
+```
+
+Spin up the container:
+
+```
+docker run -it --rm -p 1337:80 explorer:prod
+```
+
+Navigate to http://localhost:1337/ in your browser to view the app.
+
+### Building production with Docker Compose
+
+```
+docker-compose -f docker-compose.prod.yml up -d --build
+```
+
+Navigate to http://localhost:1337/ in your browser to view the app.
 
 ## License
 
